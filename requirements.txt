@@ -1,0 +1,6 @@
+pyyaml
+rjsmin
+rcssmin
+minify-html
+# feedgen
+# readtime
