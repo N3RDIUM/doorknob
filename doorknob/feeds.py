@@ -1,6 +1,5 @@
-from datetime import date, datetime
+from datetime import date, datetime, time, timezone
 import json
-from copy import deepcopy
 from feedgen.feed import FeedGenerator
 import logging
 
@@ -40,6 +39,20 @@ def feedgen_feed(filename, config, posts):
         fe = feed.add_entry()
         fe.id(post["url"])
         fe.title(post["title"])
+        fe.description(post["description"])
+        dt = datetime.combine(
+            post["lastmod"], 
+            time(),
+            tzinfo=timezone.utc  # TODO configurable timezone
+        )
+        fe.updated(dt)
+        # in case it was modified after publishing
+        dt = datetime.combine(
+            post.get("published", post["lastmod"]),
+            time(),
+            tzinfo=timezone.utc  # TODO configurable timezone
+        )
+        fe.published(dt)
         fe.link(href=post["url"])
 
     feed_type = config.get("type")
