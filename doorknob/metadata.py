@@ -13,7 +13,10 @@ META_PREFIX = "<!--meta start"
 META_SUFFIX = "meta end-->"
 
 def urlify(path: str) -> URL:
-    return "https://n3rdium.dev/" + path.removeprefix(".").removeprefix("/")
+    return "https://n3rdium.dev/" + path \
+        .removeprefix(".") \
+        .removeprefix("/") \
+        .removesuffix("index.html")
 
 def extract_metadata(file: str):
     with open(file, "r") as f:
