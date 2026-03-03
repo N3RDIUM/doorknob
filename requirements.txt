@@ -2,5 +2,5 @@ pyyaml
 rjsmin
 rcssmin
 minify-html
-# feedgen
+feedgen
 # readtime
