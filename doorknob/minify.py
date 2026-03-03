@@ -1,5 +1,8 @@
 import os
 import minify_html
+import logging
+
+logger = logging.getLogger(__name__)
 
 def minify(source: str) -> str:
     return minify_html.minify(
@@ -15,10 +18,10 @@ def minify_file(path: str) -> None:
 
     with open(path, "w") as file:
         _ = file.write(minified)
-        print(f"    {path}")
+        logger.info(f"* {path}")
 
 def minifier():
-    print("minifying html")
+    logger.info("minifying html")
     for root, _, files in os.walk(".", topdown=True):
         for file in files:
             if not file.endswith(".html"):
