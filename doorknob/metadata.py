@@ -18,7 +18,6 @@ def urlify(path: str) -> URL:
 def extract_metadata(file: str):
     with open(file, "r") as f:
         contents = f.read()
-        print(contents)
 
     try:
         raw_yaml = contents.split(META_PREFIX)[1].split(META_SUFFIX)[0]
@@ -30,7 +29,7 @@ def extract_metadata(file: str):
         logger.warning(f"! {file} IndexError: {e}")
         return
     except Exception as e:
-        print(f"! {file} Exception: {e}")
+        logger.warning(f"! {file} Exception: {e}")
         return
 
 DEFAULT_LASTMOD = date.today().strftime("%Y-%m-%d")
