@@ -8,7 +8,8 @@ from .doorknob import (
     process_metadata,
     dev_remove,
     inline,
-    minifier
+    minifier,
+    build_feeds
 )
 
 WELCOME = "doorknob, site builder and optimizer tailored for n3rdium.dev"
@@ -16,6 +17,7 @@ root_logger.info(WELCOME)
 
 # load config
 target = "./"
+config = {}
 if os.path.exists("doorknob.json"):
     with open("doorknob.json", "r") as f:
         config = json.load(f)
@@ -26,8 +28,12 @@ with chdir(target):
     load_css("css")
     load_js("js")
 
-    process_metadata()
+    pages = process_metadata()
     dev_remove()
     inline()
     minifier()
+
+    feeds_config = config.get("feeds")
+    if feeds_config is not None:
+        build_feeds(pages, feeds_config)
 

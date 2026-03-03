@@ -13,6 +13,7 @@ META_PREFIX = "<!--meta start"
 META_SUFFIX = "meta end-->"
 
 def urlify(path: str) -> URL:
+    # TODO make toplevel url configurable
     return "https://n3rdium.dev/" + path \
         .removeprefix(".") \
         .removeprefix("/") \
@@ -26,6 +27,7 @@ def extract_metadata(file: str):
         raw_yaml = contents.split(META_PREFIX)[1].split(META_SUFFIX)[0]
         metadata: Metadata = yaml.safe_load(raw_yaml)
         url = urlify(file)
+        metadata["url"] = url
         pages[url] = metadata
         logger.info(f"* {file}")
     except IndexError as e:
@@ -83,4 +85,6 @@ def process_metadata():
     sitemap = build_sitemap()
     with open(sitemap_path, "w") as f:
         _ = f.write(sitemap)
+
+    return pages
 
