@@ -39,8 +39,8 @@ def load_js(path: str):
 INLINE_PREFIX = "<!--inline start"
 INLINE_SUFFIX = "inline end-->"
 
-AUTOGEN_PREFIX = "<!--inline inject start-->"
-AUTOGEN_SUFFIX = "<!--inline inject end-->"
+INJECT_PREFIX = "<!--inline inject start-->"
+INJECT_SUFFIX = "<!--inline inject end-->"
 
 
 def process_inline_block(inline_block: str) -> tuple[list[str], list[str]]:
@@ -107,12 +107,12 @@ def process_file(path: str):
     stylesheets, scripts = process_inline_block(inline_block)
     autogen = autogen_block(stylesheets, scripts)
 
-    before = contents.split(AUTOGEN_PREFIX)[0]
-    after = contents.split(AUTOGEN_SUFFIX)[1]
+    before = contents.split(INJECT_PREFIX)[0]
+    after = contents.split(INJECT_SUFFIX)[1]
 
-    new_file = f"""{before}{AUTOGEN_PREFIX}
+    new_file = f"""{before}{INJECT_PREFIX}
 {autogen.strip("\n")}
-        {AUTOGEN_SUFFIX}{after}"""
+        {INJECT_SUFFIX}{after}"""
 
     with open(path, "w") as file:
         _ = file.write(new_file)

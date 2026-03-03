@@ -18,6 +18,7 @@ def urlify(path: str) -> URL:
 def extract_metadata(file: str):
     with open(file, "r") as f:
         contents = f.read()
+        print(contents)
 
     try:
         raw_yaml = contents.split(META_PREFIX)[1].split(META_SUFFIX)[0]
@@ -53,6 +54,9 @@ def build_sitemap() -> str:
     entries: list[str] = []
 
     for url, metadata in pages.items():
+        if metadata is None:
+            logger.warning(f"! {url} [no metadata]")
+            continue
         if metadata.get("sitemap_invisible"):
             logger.info(f"* {url} [invisible]")
             continue
