@@ -37,3 +37,7 @@ with chdir(target):
     if feeds_config is not None:
         build_feeds(pages, feeds_config)
 
+    find_replace_pairs = config.get("find_replace")
+    if find_replace_pairs is not None:
+        find_replace(find_replace_pairs)
+
