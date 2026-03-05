@@ -9,7 +9,8 @@ from .doorknob import (
     dev_remove,
     inline,
     minifier,
-    build_feeds
+    build_feeds,
+    find_replace
 )
 
 WELCOME = "doorknob, site builder and optimizer tailored for n3rdium.dev"

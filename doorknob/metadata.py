@@ -28,6 +28,7 @@ def extract_metadata(file: str):
         metadata: Metadata = yaml.safe_load(raw_yaml)
         url = urlify(file)
         metadata["url"] = url
+        metadata["relpath"] = f"/{file}".removesuffix("index.html")
         pages[url] = metadata
         logger.info(f"* {file}")
     except IndexError as e:
