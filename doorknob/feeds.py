@@ -95,6 +95,18 @@ def build_feeds(pages, config) -> None:
             logger.error(f"! unknown feed type {feed_type}, skipping")
             continue
 
-        feed_builders[feed_type](feed, config[feed], posts)
+        sorted_posts = posts
+        if "sort" in config[feed]:
+            sort_config = config[feed]["sort"]
+            key = sort_config.get("key")
+            reverse = sort_config.get("reverse", False)
+            if key is not None:
+                sorted_posts.sort(
+                    key=lambda x: x[key],
+                    reverse=reverse
+                )
+            else:
+                logger.warning(f"! sorting enabled, but no key configured for {feed}")
+        feed_builders[feed_type](feed, config[feed], sorted_posts)
         logger.info(f"* {feed}")
 
