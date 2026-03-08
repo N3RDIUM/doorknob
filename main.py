@@ -10,7 +10,8 @@ from .doorknob import (
     inline,
     minifier,
     build_feeds,
-    find_replace
+    find_replace,
+    image_optimizer
 )
 
 WELCOME = "doorknob, site builder and optimizer tailored for n3rdium.dev"
@@ -33,6 +34,7 @@ with chdir(target):
     dev_remove()
     inline()
     minifier()
+    image_optimizer()
 
     feeds_config = config.get("feeds")
     if feeds_config is not None:

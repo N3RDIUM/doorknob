@@ -4,3 +4,5 @@ rcssmin
 minify-html
 feedgen
 # readtime
+beautifulsoup4
+pillow
