@@ -5,6 +5,7 @@ from .minify import minifier
 from .feeds import build_feeds
 from .find_replace import find_replace
 from .image_optimizer import image_optimizer
+from .highlight import syntax_highlighter
 
 __all__ = [
     "dev_remove",
@@ -15,6 +16,7 @@ __all__ = [
     "minifier",
     "build_feeds",
     "find_replace",
-    "image_optimizer"
+    "image_optimizer",
+    "syntax_highlighter"
 ]
 

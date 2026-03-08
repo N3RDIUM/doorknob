@@ -6,3 +6,4 @@ feedgen
 # readtime
 beautifulsoup4
 pillow
+pygments
