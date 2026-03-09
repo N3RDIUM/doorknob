@@ -11,6 +11,7 @@ def _find_replace(find: str, replace: str) -> None:
         logger.info(f"! {find} -> {replace} error: {e}")
 
 def find_replace(pairs) -> None:
+    logger.info(f"processing find-replace entries")
     for find, replace in pairs.items():
         _find_replace(find, replace)
 
