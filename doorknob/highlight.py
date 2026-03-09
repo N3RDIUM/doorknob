@@ -39,6 +39,7 @@ def process_file(path: str) -> None:
     highlighted = _highlight(contents)
     with open(path, "w") as f:
         _ = f.write(highlighted)
+    logger.info(f"* {path}")
 
 def syntax_highlighter() -> None:
     logger.info("syntax highlighting")
