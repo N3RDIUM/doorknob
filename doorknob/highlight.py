@@ -14,10 +14,16 @@ def _highlight(html: str) -> str:
         code_text = code.get_text()
 
         lang = None
+        ignore = False
         for cls in code.get("class", []):
+            if cls == "nohighlight":
+                ignore = True
             if cls.startswith("language-"):
                 lang = cls.replace("language-", "")
                 break
+
+        if ignore:
+            continue
 
         try:
             lexer = get_lexer_by_name(lang) if lang else guess_lexer(code_text)
